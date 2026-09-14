@@ -45,3 +45,13 @@ body{background:var(--surface-soft);color:var(--text)}
 .locations{padding-top:72px;padding-bottom:92px}
 .split-story{margin-top:56px;padding-bottom:82px}
 @media(max-width:700px){.team{padding-top:70px;padding-bottom:55px}.locations{padding-top:58px;padding-bottom:72px}.split-story{margin-top:36px;padding-bottom:62px}}
+
+/* Equipo: fondo de estudio más sereno y foco en las personas */
+.team{background:linear-gradient(180deg,#f2f6f2 0%,#edf3ef 100%)}
+.team-photo{background:radial-gradient(circle at 78% 18%,#d7ebe7 0 22%,transparent 53%),linear-gradient(135deg,#e8f0ec 0%,#d9e6e1 100%)}
+.team-photo img{object-position:76% center;transform:scale(1.16);filter:saturate(.72) contrast(1.02) brightness(1.03);transition:transform .65s cubic-bezier(.22,1,.36,1),filter .65s ease}
+.team-card:nth-child(2) .team-photo img{object-position:72% center}
+.team-card:hover .team-photo img{transform:scale(1.21);filter:saturate(.84) contrast(1.03) brightness(1.04)}
+.team-photo:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,rgba(242,247,244,.97) 0%,rgba(242,247,244,.82) 14%,rgba(242,247,244,.18) 38%,transparent 57%)}
+.team-photo>span{z-index:1}
+@media(prefers-reduced-motion:reduce){.team-photo img,.team-card:hover .team-photo img{transform:scale(1.16);transition:none}}
