@@ -49,7 +49,7 @@ body{background:var(--surface-soft);color:var(--text)}
 /* Equipo: fondo de estudio más sereno y foco en las personas */
 .team{background:linear-gradient(180deg,#f2f6f2 0%,#edf3ef 100%)}
 .team-photo{background:radial-gradient(circle at 78% 18%,#d7ebe7 0 22%,transparent 53%),linear-gradient(135deg,#e8f0ec 0%,#d9e6e1 100%)}
-.team-photo img{position:relative;z-index:1;object-position:84% 48%;transform:scale(1.48);filter:saturate(.62) contrast(1.02) brightness(1.05);transition:transform .65s cubic-bezier(.22,1,.36,1),filter .65s ease}
+.team-photo img{position:relative;z-index:1;object-position:84% 48%;transform:scale(1.48);filter:saturate(.62) contrast(1.02) brightness(1.05);-webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 19%,rgba(0,0,0,.72) 40%,#000 60%);mask-image:linear-gradient(90deg,transparent 0%,transparent 19%,rgba(0,0,0,.72) 40%,#000 60%);transition:transform .65s cubic-bezier(.22,1,.36,1),filter .65s ease}
 .team-card:nth-child(2) .team-photo img{object-position:79% 46%}
 .team-card:hover .team-photo img{transform:scale(1.54);filter:saturate(.76) contrast(1.03) brightness(1.06)}
 .team-photo:after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(112deg,rgba(242,247,244,.99) 0%,rgba(242,247,244,.96) 25%,rgba(242,247,244,.74) 44%,rgba(242,247,244,.22) 60%,transparent 72%)}
