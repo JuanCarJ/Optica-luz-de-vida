@@ -23,3 +23,25 @@ body{background:var(--surface-soft);color:var(--text)}
 .booking{background:var(--primary);color:#fff;grid-template-columns:.85fr 1.15fr;align-items:center;padding:56px}.booking h2{color:#fff}.booking-copy>p:not(.eyebrow),.booking-note{color:#c9e1df}.booking-note span{color:var(--secondary)}.booking-form{background:var(--surface);padding:26px;border-radius:20px;box-shadow:0 14px 28px rgba(6,31,39,.18)}.booking-form label{color:var(--primary)}.booking-form input,.booking-form select{background:#fff;border-color:rgba(23,60,75,.2)}.booking-form .button{background:var(--secondary);color:var(--primary)}.booking-form .button:hover{background:#7bd0c9}.consent{color:#4e686d}.form-result{color:var(--primary)}@media(max-width:700px){.booking{padding:30px 20px;grid-template-columns:1fr}.booking-form{padding:20px}}
 .whatsapp-float{position:fixed;right:26px;bottom:82px;z-index:9;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(37,211,102,.34);transition:transform .2s ease,box-shadow .2s ease}.whatsapp-float:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 14px 30px rgba(37,211,102,.42)}.whatsapp-float .wa-icon{width:30px;height:30px}.chatbot-trigger{bottom:16px;right:23px}.location-map{background-color:#dbe8e2;background-image:linear-gradient(25deg,transparent 44%,rgba(77,129,119,.28) 45%,rgba(77,129,119,.28) 47%,transparent 48%),linear-gradient(155deg,transparent 48%,rgba(101,137,168,.23) 49%,rgba(101,137,168,.23) 51%,transparent 52%),linear-gradient(80deg,transparent 62%,rgba(255,255,255,.76) 63%,rgba(255,255,255,.76) 66%,transparent 67%),linear-gradient(15deg,transparent 25%,rgba(255,255,255,.64) 26%,rgba(255,255,255,.64) 29%,transparent 30%);background-size:160px 120px,180px 140px,220px 150px,190px 160px}.location-map iframe{opacity:.76}.map-fallback{bottom:12px}@media(max-width:560px){.whatsapp-float{right:18px;bottom:78px;width:52px;height:52px}.whatsapp-float .wa-icon{width:27px;height:27px}.chatbot-trigger{right:14px;bottom:14px}}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}.button,.pill,.wa-button,.chatbot-trigger{min-height:44px}.whatsapp-float:focus-visible{outline-offset:5px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee div,.hero-visual,.service-card,.frame-card,.team-card,.reveal{animation:none!important;transition:none!important}.hero-visual:hover,.frame-card:hover{transform:none}}
+
+/* Entrada de servicios: aparición escalonada al entrar en viewport */
+.service-card.reveal{animation:none;opacity:0;transform:translate3d(0,30px,0) scale(.965);filter:blur(4px);will-change:opacity,transform,filter;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),filter .7s ease;transition-delay:var(--card-delay,0ms)}
+.service-grid .service-card.reveal:nth-child(1){--card-delay:0ms}
+.service-grid .service-card.reveal:nth-child(2){--card-delay:90ms}
+.service-grid .service-card.reveal:nth-child(3){--card-delay:180ms}
+.service-grid .service-card.reveal:nth-child(4){--card-delay:270ms}
+.service-card.reveal.is-visible{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+.service-card.reveal.is-visible .service-icon{animation:service-icon-in .55s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--card-delay,0ms) + 120ms)}
+.service-card.reveal.is-visible:hover{transform:translate3d(0,-6px,0) scale(1.01)}
+@keyframes service-icon-in{from{opacity:0;transform:translateY(10px) rotate(-8deg)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.service-card.reveal{opacity:1;transform:none;filter:none;transition:none}.service-card.reveal.is-visible .service-icon{animation:none}}
+
+/* Ritmo y tipografía de marca: más compacto, cálido y reconocible */
+:root{--display:"Bricolage Grotesque",Manrope,system-ui,sans-serif}
+.hero h1,.section-heading h2,.frames h2,.story-copy h2,.booking h2,.service-card h3,.frame-meta h3,.team-meta h3,.location-card h3{font-family:var(--display);font-variation-settings:"opsz" 54;font-weight:650}
+.hero h1,.section-heading h2,.frames h2,.story-copy h2,.booking h2{letter-spacing:-.055em}
+.service-card h3,.frame-meta h3,.team-meta h3{letter-spacing:-.025em}
+.team{padding-top:92px;padding-bottom:68px}
+.locations{padding-top:72px;padding-bottom:92px}
+.split-story{margin-top:56px;padding-bottom:82px}
+@media(max-width:700px){.team{padding-top:70px;padding-bottom:55px}.locations{padding-top:58px;padding-bottom:72px}.split-story{margin-top:36px;padding-bottom:62px}}
