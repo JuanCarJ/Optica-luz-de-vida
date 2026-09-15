@@ -88,6 +88,14 @@ section[id]{scroll-margin-top:92px}
 .social-icon:hover,.social-icon:focus-visible{background:var(--secondary);border-color:var(--secondary);color:var(--primary);transform:translateY(-3px)}
 @media(prefers-reduced-motion:reduce){.social-icon{transition:none}.social-icon:hover{transform:none}}
 
+/* Último ajuste de composición */
+section[id]{scroll-margin-top:128px}
+.map-fallback{top:10px;bottom:auto;z-index:4;background:rgba(255,253,249,.96)}
+.services .service-card{min-height:280px}
+@media(min-width:901px){.hero{min-height:min(760px,calc(100vh - 110px))}.frames-intro,.row-heading{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(240px,.65fr);align-items:end;max-width:980px}.frames-intro>p,.row-heading>p{justify-self:end}}
+@media(min-width:701px){.team-photo{height:330px}}
+@media(max-width:700px){.services .service-card{min-height:230px}}
+
 /* Equipo: fondo de estudio más sereno y foco en las personas */
 .team{background:linear-gradient(180deg,#f2f6f2 0%,#edf3ef 100%)}
 .team-photo{background:radial-gradient(circle at 78% 18%,#d7ebe7 0 22%,transparent 53%),linear-gradient(135deg,#e8f0ec 0%,#d9e6e1 100%)}
