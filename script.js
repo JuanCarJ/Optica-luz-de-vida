@@ -137,7 +137,8 @@
   const demoLocations = qsa('.demo-location', bookingPreview);
   const demoServices = qsa('.demo-service', bookingPreview);
   const demoLocationSelect = qs('[name="demo-location"]', bookingPreview);
-  const demoCalendarLocation = qs('.demo-calendar-top span', bookingPreview);
+  const demoCalendarLocation = qs('.demo-calendar-location', bookingPreview);
+  const setPressedState = (items, selected) => items.forEach((item) => item.setAttribute('aria-pressed', String(item === selected)));
   const demoSlotLabel = () => demoSlots.find((slot) => slot.classList.contains('is-selected'))?.dataset.demoSlot || '';
   let selectedDemoService = demoServices.find((item) => item.classList.contains('is-selected'))?.dataset.demoService || 'Consulta de optometría';
   const demoServiceLabel = () => selectedDemoService;
@@ -148,6 +149,7 @@
   demoLocations.forEach((location) => location.addEventListener('click', () => {
     const value = location.dataset.demoLocation || 'Marinilla';
     demoLocations.forEach((item) => item.classList.toggle('is-selected', item === location));
+    setPressedState(demoLocations, location);
     if (demoLocationSelect) demoLocationSelect.value = value;
     if (demoCalendarLocation) demoCalendarLocation.textContent = value;
     updateDemoSelectionSummary();
@@ -155,15 +157,18 @@
   demoServices.forEach((service) => service.addEventListener('click', () => {
     selectedDemoService = service.dataset.demoService || 'Consulta de optometría';
     demoServices.forEach((item) => item.classList.toggle('is-selected', item === service));
+    setPressedState(demoServices, service);
     updateDemoSelectionSummary();
   }));
   const selectDemoSlot = (slot) => {
     demoSlots.forEach((item) => item.classList.toggle('is-selected', item === slot));
+    setPressedState(demoSlots, slot);
     updateDemoSelectionSummary();
   };
   demoDates.forEach((date) => date.addEventListener('click', () => {
     const value = date.dataset.demoDate || '';
     demoDates.forEach((item) => item.classList.toggle('is-selected', item === date));
+    setPressedState(demoDates, date);
     demoSlots.forEach((slot) => { slot.dataset.demoSlot = `${value} · ${slot.textContent.trim()}`; });
     selectDemoSlot(demoSlots[0]);
   }));
