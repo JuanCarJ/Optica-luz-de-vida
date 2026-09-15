@@ -112,6 +112,76 @@
   privacyDialog?.addEventListener('cancel', (event) => { event.preventDefault(); closePrivacy(); });
   privacyDialog?.addEventListener('click', (event) => { if (event.target === privacyDialog) closePrivacy(); });
 
+  // Vista de propuesta para el agendamiento: calendario demo y alternativa por WhatsApp.
+  const bookingPreview = byId('booking-preview-dialog');
+  const bookingPreviewClose = byId('booking-preview-close');
+  let lastBookingPreviewTrigger = null;
+  const closeBookingPreview = () => {
+    if (!bookingPreview) return;
+    if (typeof bookingPreview.close === 'function' && bookingPreview.open) bookingPreview.close();
+    lastBookingPreviewTrigger?.focus();
+  };
+  const openBookingPreview = (trigger) => {
+    if (!bookingPreview) return;
+    lastBookingPreviewTrigger = trigger;
+    if (typeof bookingPreview.showModal === 'function' && !bookingPreview.open) bookingPreview.showModal();
+    bookingPreviewClose?.focus();
+  };
+  qsa('[data-open-booking-preview]').forEach((trigger) => trigger.addEventListener('click', (event) => { event.preventDefault(); openBookingPreview(trigger); }));
+  bookingPreviewClose?.addEventListener('click', closeBookingPreview);
+  bookingPreview?.addEventListener('cancel', (event) => { event.preventDefault(); closeBookingPreview(); });
+  bookingPreview?.addEventListener('click', (event) => { if (event.target === bookingPreview) closeBookingPreview(); });
+  const demoDates = qsa('.demo-day', bookingPreview);
+  const demoSlots = qsa('.demo-slot', bookingPreview);
+  const demoSelectedSlot = byId('demo-selected-slot');
+  const demoLocations = qsa('.demo-location', bookingPreview);
+  const demoServices = qsa('.demo-service', bookingPreview);
+  const demoLocationSelect = qs('[name="demo-location"]', bookingPreview);
+  const demoCalendarLocation = qs('.demo-calendar-top span', bookingPreview);
+  const demoSlotLabel = () => demoSlots.find((slot) => slot.classList.contains('is-selected'))?.dataset.demoSlot || '';
+  let selectedDemoService = demoServices.find((item) => item.classList.contains('is-selected'))?.dataset.demoService || 'Consulta de optometría';
+  const demoServiceLabel = () => selectedDemoService;
+  const demoLocationLabel = () => demoLocations.find((item) => item.classList.contains('is-selected'))?.dataset.demoLocation || 'Marinilla';
+  const updateDemoSelectionSummary = () => {
+    if (demoSelectedSlot) demoSelectedSlot.textContent = `Horario elegido: ${demoServiceLabel()} · ${demoLocationLabel()} · ${demoSlotLabel()}`;
+  };
+  demoLocations.forEach((location) => location.addEventListener('click', () => {
+    const value = location.dataset.demoLocation || 'Marinilla';
+    demoLocations.forEach((item) => item.classList.toggle('is-selected', item === location));
+    if (demoLocationSelect) demoLocationSelect.value = value;
+    if (demoCalendarLocation) demoCalendarLocation.textContent = value;
+    updateDemoSelectionSummary();
+  }));
+  demoServices.forEach((service) => service.addEventListener('click', () => {
+    selectedDemoService = service.dataset.demoService || 'Consulta de optometría';
+    demoServices.forEach((item) => item.classList.toggle('is-selected', item === service));
+    updateDemoSelectionSummary();
+  }));
+  const selectDemoSlot = (slot) => {
+    demoSlots.forEach((item) => item.classList.toggle('is-selected', item === slot));
+    updateDemoSelectionSummary();
+  };
+  demoDates.forEach((date) => date.addEventListener('click', () => {
+    const value = date.dataset.demoDate || '';
+    demoDates.forEach((item) => item.classList.toggle('is-selected', item === date));
+    demoSlots.forEach((slot) => { slot.dataset.demoSlot = `${value} · ${slot.textContent.trim()}`; });
+    selectDemoSlot(demoSlots[0]);
+  }));
+  demoSlots.forEach((slot) => slot.addEventListener('click', () => selectDemoSlot(slot)));
+  const demoForm = byId('demo-appointment-form');
+  const demoResult = qs('.demo-form-result', demoForm);
+  demoForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(demoForm);
+    const name = String(data.get('demo-name') || '').trim();
+    const phone = String(data.get('demo-phone') || '').replace(/\D/g, '');
+    if (demoResult) {
+      if (name.length < 2 || phone.length < 7) { demoResult.textContent = 'Escribe tu nombre y un celular válido para continuar.'; demoResult.classList.add('has-error'); return; }
+      demoResult.classList.remove('has-error'); demoResult.textContent = `Ejemplo preparado para ${name}: ${demoServiceLabel()} en ${demoLocationLabel()}, ${demoSlotLabel()}. En una versión conectada, el equipo confirmaría esta cita.`;
+    }
+  });
+  updateDemoSelectionSummary();
+
   // Horarios: convierte el texto corrido en filas legibles por día y rango.
   qsa('.location-data > div:nth-child(2)').forEach((hours) => {
     const paragraph = qs('p', hours);
