@@ -454,7 +454,10 @@ h1,h2,h3,.button,.site-header nav,.announcement,.eyebrow,.card-number,.frame-tag
 .brand-strip{border-top:1px solid rgba(23,60,75,.09);border-bottom:1px solid rgba(23,60,75,.09);background:rgba(255,253,249,.58)}
 .brand-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:30px;max-width:1240px;margin:0 auto;padding:17px 28px}
 .brand-strip-label{flex:0 0 auto;margin:0;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.brand-groups{display:flex;align-items:center;justify-content:flex-end;gap:24px;min-width:0}
+.brand-viewport{min-width:0;overflow:hidden;position:relative;border-radius:10px}
+.brand-track{display:flex;align-items:center;width:max-content;animation:brand-marquee 17s linear infinite}
+@keyframes brand-marquee{to{transform:translateX(-50%)}}
+.brand-groups{display:flex;align-items:center;justify-content:flex-end;gap:24px;min-width:0;flex:0 0 auto;padding-right:44px}
 .brand-group{display:flex;align-items:center;gap:19px;min-width:0;white-space:nowrap}
 .brand-group-label{color:var(--teal-dark);font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .brand-divider{width:1px;height:28px;background:rgba(23,60,75,.14);flex:0 0 auto}
@@ -467,6 +470,8 @@ h1,h2,h3,.button,.site-header nav,.announcement,.eyebrow,.card-number,.frame-tag
 .brand-crizal{font-size:15px;font-weight:800;letter-spacing:-.07em}
 .brand-zeiss{font-family:Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:.08em}
 .brand-shamir{font-size:15px;font-weight:800;letter-spacing:-.06em}
-@media(max-width:900px){.brand-strip-inner{display:block;padding:15px 18px}.brand-strip-label{display:block;margin-bottom:12px}.brand-groups{justify-content:flex-start;gap:18px;overflow-x:auto;padding-bottom:3px;scrollbar-width:none}.brand-groups::-webkit-scrollbar{display:none}.brand-group{gap:15px}.brand-divider{height:24px}}
+@media(max-width:900px){.brand-strip-inner{display:block;padding:15px 18px}.brand-strip-label{display:block;margin-bottom:12px}.brand-viewport{width:100%}.brand-track{animation-duration:14s}.brand-groups{justify-content:flex-start;gap:18px;padding-bottom:3px}.brand-group{gap:15px}.brand-divider{height:24px}}
 @media(max-width:560px){.brand-strip-inner{padding-inline:18px}.brand-strip-label{font-size:8px}.brand-wordmark{font-size:14px}.brand-rayban{font-size:16px}.brand-group-label{font-size:8px}.brand-groups{gap:16px}}
-@media(prefers-reduced-motion:reduce){.brand-wordmark{transition:none}}
+.brand-viewport:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.brand-strip:hover .brand-track,.brand-viewport:focus .brand-track{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.brand-track{animation:none}.brand-wordmark{transition:none}}
