@@ -82,6 +82,12 @@ section[id]{scroll-margin-top:92px}
 @media(max-width:560px){.chatbot-trigger{width:52px;height:52px;right:14px;bottom:14px}.chatbot-trigger:after{display:none}}
 @media(prefers-reduced-motion:reduce){.service-card,.frame-card,.team-card,.location-card,.chatbot-trigger,.chatbot-trigger:after{transition:none}.location-card:hover,.chatbot-trigger:hover{transform:none}}
 
+.social-links{display:flex!important;flex-direction:row!important;gap:9px!important;margin-top:7px}
+.social-icon{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(216,233,231,.3);border-radius:50%;color:#d8e9e7;background:rgba(255,255,255,.05);transition:transform .22s ease,background .22s ease,border-color .22s ease}
+.social-icon svg{width:15px;height:15px;display:block}.social-icon .wa-icon{width:16px;height:16px}
+.social-icon:hover,.social-icon:focus-visible{background:var(--secondary);border-color:var(--secondary);color:var(--primary);transform:translateY(-3px)}
+@media(prefers-reduced-motion:reduce){.social-icon{transition:none}.social-icon:hover{transform:none}}
+
 /* Equipo: fondo de estudio más sereno y foco en las personas */
 .team{background:linear-gradient(180deg,#f2f6f2 0%,#edf3ef 100%)}
 .team-photo{background:radial-gradient(circle at 78% 18%,#d7ebe7 0 22%,transparent 53%),linear-gradient(135deg,#e8f0ec 0%,#d9e6e1 100%)}
