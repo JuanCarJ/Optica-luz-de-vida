@@ -152,8 +152,99 @@
     });
   };
   if (pills.length) {
-    pills.forEach((pill) => pill.addEventListener('click', () => applyFilter(pill.dataset.filter || 'all')));
+    pills.forEach((pill) => pill.addEventListener('click', () => { applyFilter(pill.dataset.filter || 'all'); window.setTimeout(() => syncFrameCarousel?.(), 0); }));
     applyFilter(pills.find((pill) => pill.classList.contains('active'))?.dataset.filter || 'all');
+  }
+
+  // Carrusel de monturas: avance suave, controles táctiles y pausa accesible.
+  const frameCarousel = qs('.frame-carousel');
+  const framePrev = qs('.frame-control-prev', frameCarousel);
+  const frameNext = qs('.frame-control-next', frameCarousel);
+  const framePlay = qs('.frame-play');
+  const frameDots = qs('.frame-carousel-dots');
+  const frameStatus = qs('.frame-carousel-status');
+  const frameGrid = qs('.frame-grid', frameCarousel);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let frameTimer = null;
+  let frameScrollRaf = 0;
+  let framePaused = reducedMotion.matches;
+  let frameHover = false;
+  let frameFocus = false;
+
+  const visibleFrames = () => frameCards.filter((card) => !card.hidden);
+  const frameIndex = () => {
+    const visible = visibleFrames();
+    if (!visible.length || !frameGrid) return 0;
+    const left = frameGrid.getBoundingClientRect().left;
+    let closest = 0;
+    let distance = Infinity;
+    visible.forEach((card, index) => {
+      const delta = Math.abs(card.getBoundingClientRect().left - left);
+      if (delta < distance) { distance = delta; closest = index; }
+    });
+    return closest;
+  };
+  const scrollToFrame = (index) => {
+    const visible = visibleFrames();
+    const card = visible[index];
+    if (!card || !frameGrid) return;
+    const target = card.offsetLeft - frameGrid.offsetLeft;
+    window.cancelAnimationFrame(frameScrollRaf);
+    if (reducedMotion.matches) { frameGrid.scrollLeft = target; return; }
+    const start = frameGrid.scrollLeft;
+    const distance = target - start;
+    const startedAt = performance.now();
+    const duration = 950;
+    const tick = (now) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = progress < .5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+      frameGrid.scrollLeft = start + distance * eased;
+      if (progress < 1) frameScrollRaf = window.requestAnimationFrame(tick);
+    };
+    frameScrollRaf = window.requestAnimationFrame(tick);
+  };
+  const syncFrameCarousel = () => {
+    const visible = visibleFrames();
+    const current = Math.min(frameIndex(), Math.max(visible.length - 1, 0));
+    if (frameStatus) frameStatus.textContent = visible.length ? `${current + 1} de ${visible.length}` : 'Sin resultados';
+    if (frameDots) {
+      frameDots.replaceChildren(...visible.map((card, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button'; dot.className = 'frame-dot'; dot.setAttribute('aria-label', `Ver ${qs('h3', card)?.textContent?.trim() || `montura ${index + 1}`}`);
+        dot.setAttribute('aria-current', String(index === current));
+        dot.addEventListener('click', () => { framePaused = true; updatePlayButton(); scrollToFrame(index); });
+        return dot;
+      }));
+    }
+  };
+  const updatePlayButton = () => {
+    if (!framePlay) return;
+    framePlay.textContent = framePaused ? 'Reanudar movimiento' : 'Pausar movimiento';
+    framePlay.setAttribute('aria-pressed', String(framePaused));
+  };
+  const stopFrameTimer = () => { if (frameTimer) { window.clearInterval(frameTimer); frameTimer = null; } };
+  const startFrameTimer = () => {
+    stopFrameTimer();
+    if (!frameCarousel || framePaused || reducedMotion.matches) return;
+    frameTimer = window.setInterval(() => {
+      if (frameHover || frameFocus) return;
+      const visible = visibleFrames();
+      if (visible.length > 1) scrollToFrame((frameIndex() + 1) % visible.length);
+    }, 9000);
+  };
+  const restartFrameTimer = () => { updatePlayButton(); startFrameTimer(); };
+  const refreshFrameMotion = () => { framePaused = reducedMotion.matches || framePaused; restartFrameTimer(); };
+  if (frameCarousel && frameGrid) {
+    framePrev?.addEventListener('click', () => { framePaused = true; updatePlayButton(); const visible = visibleFrames(); scrollToFrame((frameIndex() - 1 + visible.length) % visible.length); });
+    frameNext?.addEventListener('click', () => { framePaused = true; updatePlayButton(); const visible = visibleFrames(); scrollToFrame((frameIndex() + 1) % visible.length); });
+    framePlay?.addEventListener('click', () => { framePaused = !framePaused; restartFrameTimer(); });
+    frameGrid.addEventListener('scroll', () => window.requestAnimationFrame(syncFrameCarousel), { passive: true });
+    frameCarousel.addEventListener('pointerenter', () => { frameHover = true; });
+    frameCarousel.addEventListener('pointerleave', () => { frameHover = false; });
+    frameCarousel.addEventListener('focusin', () => { frameFocus = true; });
+    frameCarousel.addEventListener('focusout', (event) => { if (!frameCarousel.contains(event.relatedTarget)) frameFocus = false; });
+    reducedMotion.addEventListener?.('change', refreshFrameMotion);
+    syncFrameCarousel(); updatePlayButton(); startFrameTimer();
   }
 
   // Detalle de montura en dialog reutilizando la imagen existente.

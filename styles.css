@@ -423,3 +423,29 @@ h1,h2,h3,.button,.site-header nav,.announcement,.eyebrow,.card-number,.frame-tag
 .booking-form .form-result{position:relative;z-index:1;grid-column:1/-1;margin:0;padding:0 2px}
 @media(max-width:700px){.booking-form{padding:20px 18px;gap:15px;border-radius:22px}.booking-form input,.booking-form select{height:52px;min-height:52px}.booking-form .consent{padding:13px 12px}.booking-form .button{min-height:54px}}
 @media(prefers-reduced-motion:reduce){.booking-form input,.booking-form select,.booking-form .button{transition:none}}
+
+/* Carrusel de monturas: selección editorial con movimiento controlable */
+.frame-carousel{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:10px;margin:25px auto 0;max-width:1184px}
+.frame-carousel .frame-grid{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 36px)/3);grid-template-columns:none;gap:18px;min-width:0;margin:0;padding:3px 2px 18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.frame-carousel .frame-grid::-webkit-scrollbar{display:none}
+.frame-carousel .frame-card{min-width:0;margin:0;scroll-snap-align:start}
+.frame-control{width:44px;height:44px;display:grid;place-items:center;border:1px solid rgba(23,60,75,.16);border-radius:50%;background:rgba(255,255,255,.82);color:var(--navy);font-size:22px;line-height:1;cursor:pointer;box-shadow:0 8px 18px rgba(23,60,75,.1);transition:transform .2s ease,background .2s ease,border-color .2s ease}
+.frame-control:hover,.frame-control:focus-visible{background:var(--navy);border-color:var(--navy);color:#fff;transform:translateY(-2px)}
+.frame-carousel-footer{display:flex;align-items:center;justify-content:center;gap:16px;max-width:1184px;margin:2px auto 0;min-height:44px}
+.frame-carousel-dots{display:flex;align-items:center;gap:7px}
+.frame-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#bfd0cf;cursor:pointer;transition:width .2s ease,background .2s ease}
+.frame-dot[aria-current="true"]{width:24px;border-radius:999px;background:var(--coral)}
+.frame-carousel-status{margin:0;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.04em}
+.frame-play{min-height:36px;border:1px solid rgba(23,60,75,.16);border-radius:999px;padding:7px 12px;background:transparent;color:var(--navy);font-size:10px;font-weight:800;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.frame-play:hover,.frame-play:focus-visible{background:var(--navy);border-color:var(--navy);color:#fff}
+.frame-graphite{background:#d5d8d2}.frame-champagne{background:#e7d1bd}.frame-olive{background:#c3d0bf}
+.frame-tag{max-width:calc(100% - 34px)}
+@media(max-width:900px){.frame-carousel .frame-grid{grid-auto-columns:calc((100% - 18px)/2)}}
+@media(max-width:700px){.frame-carousel{display:block;position:relative;margin-top:18px}.frame-carousel .frame-grid{grid-auto-columns:minmax(82%,1fr);gap:14px;padding:3px 26px 18px 2px}.frame-control{position:absolute;z-index:2;top:calc(50% - 33px);width:40px;height:40px;background:rgba(255,255,255,.92)}.frame-control-prev{left:7px}.frame-control-next{right:7px}.frame-carousel-footer{gap:11px;margin-top:0;justify-content:space-between}.frame-carousel-status{font-size:10px}.frame-play{padding:7px 10px}}
+@media(prefers-reduced-motion:reduce){.frame-carousel .frame-grid{scroll-behavior:auto}.frame-control,.frame-dot,.frame-play{transition:none}}
+
+/* Movimiento lento y foco visual al explorar una montura */
+.frame-carousel .frame-card{transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,filter .35s ease}
+.frame-carousel .frame-card:hover{transform:translateY(-5px) scale(1.018);box-shadow:0 20px 38px rgba(23,60,75,.15);filter:saturate(1.06)}
+.frame-carousel .frame-card:hover .frame-image img{transform:scale(1.065) rotate(-.5deg)}
+@media(prefers-reduced-motion:reduce){.frame-carousel .frame-card,.frame-carousel .frame-card:hover{transform:none;transition:none}.frame-carousel .frame-card:hover .frame-image img{transform:none;transition:none}}
