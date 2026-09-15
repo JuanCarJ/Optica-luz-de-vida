@@ -408,3 +408,18 @@ h1,h2,h3,.button,.site-header nav,.announcement,.eyebrow,.card-number,.frame-tag
 @media(max-width:700px){.privacy-dialog{padding:28px 20px 22px}.privacy-dialog .privacy-grid{grid-template-columns:1fr}.privacy-dialog h2{font-size:36px}.location-data{grid-template-columns:1fr;gap:16px}.hours-list{gap:6px}.site-header nav a::after{display:none}}
 @media(max-width:900px){.site-header nav .nav-social{width:auto;justify-content:flex-start;gap:10px;padding:13px 14px}.site-header nav .nav-social-label{display:inline;font-size:13px;font-weight:700}}
 @media(prefers-reduced-motion:reduce){.site-header nav a,.site-header nav a::after,.privacy-dialog-close,.glasses-icon,.hero-actions .text-link>b,.site-header nav .nav-social svg{transition:none}}
+
+/* booking card: one coherent surface instead of unrelated white controls */
+.booking-form{position:relative;overflow:hidden;padding:32px;gap:20px;border:1px solid rgba(255,255,255,.78);border-radius:24px;background:linear-gradient(145deg,#fff 0%,#f5faf8 100%);box-shadow:0 24px 54px rgba(5,23,34,.24),inset 0 1px 0 rgba(255,255,255,.9)}
+.booking-form::before{content:"";position:absolute;right:-74px;top:-82px;width:210px;height:210px;border:1px solid rgba(44,166,164,.22);border-radius:50%;box-shadow:0 0 0 14px rgba(44,166,164,.06),0 0 0 28px rgba(44,166,164,.035);pointer-events:none}
+.booking-form>label{position:relative;z-index:1;display:block;font-size:12px;line-height:1.25;letter-spacing:.01em}
+.booking-form input,.booking-form select{height:54px;min-height:54px;margin-top:8px;padding:13px 15px;border:1px solid #c8d7dc;border-radius:14px;background:#f8fcfa;box-shadow:0 2px 0 rgba(18,48,74,.035),inset 0 1px 0 rgba(255,255,255,.8);transition:border-color .2s ease,box-shadow .2s ease,background-color .2s ease}
+.booking-form input:hover,.booking-form select:hover{border-color:#7abcb8;background:#fff}
+.booking-form input:focus,.booking-form select:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(44,166,164,.16),0 2px 0 rgba(18,48,74,.04);background:#fff}
+.booking-form .consent{position:relative;z-index:1;display:flex;align-items:flex-start;gap:11px;grid-column:1/-1;padding:14px 15px;border:1px solid #d4e5e1;border-radius:14px;background:#edf6f3;line-height:1.45}
+.booking-form .consent input{height:20px;min-height:20px;margin:1px 0 0;box-shadow:none}
+.booking-form .button{position:relative;z-index:1;min-height:56px;grid-column:1/-1;border-radius:14px;background:linear-gradient(135deg,#2ca6a4,#55c3b7);box-shadow:0 12px 22px rgba(44,166,164,.22);transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+.booking-form .button:hover{background:linear-gradient(135deg,#23918f,#42b4aa);box-shadow:0 16px 28px rgba(44,166,164,.3);filter:saturate(1.05)}
+.booking-form .form-result{position:relative;z-index:1;grid-column:1/-1;margin:0;padding:0 2px}
+@media(max-width:700px){.booking-form{padding:20px 18px;gap:15px;border-radius:22px}.booking-form input,.booking-form select{height:52px;min-height:52px}.booking-form .consent{padding:13px 12px}.booking-form .button{min-height:54px}}
+@media(prefers-reduced-motion:reduce){.booking-form input,.booking-form select,.booking-form .button{transition:none}}
