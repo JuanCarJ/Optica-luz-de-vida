@@ -449,3 +449,24 @@ h1,h2,h3,.button,.site-header nav,.announcement,.eyebrow,.card-number,.frame-tag
 .frame-carousel .frame-card:hover{transform:translateY(-5px) scale(1.018);box-shadow:0 20px 38px rgba(23,60,75,.15);filter:saturate(1.06)}
 .frame-carousel .frame-card:hover .frame-image img{transform:scale(1.065) rotate(-.5deg)}
 @media(prefers-reduced-motion:reduce){.frame-carousel .frame-card,.frame-carousel .frame-card:hover{transform:none;transition:none}.frame-carousel .frame-card:hover .frame-image img{transform:none;transition:none}}
+
+/* Franja de marcas: referencia visual sobria debajo del hero */
+.brand-strip{border-top:1px solid rgba(23,60,75,.09);border-bottom:1px solid rgba(23,60,75,.09);background:rgba(255,253,249,.58)}
+.brand-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:30px;max-width:1240px;margin:0 auto;padding:17px 28px}
+.brand-strip-label{flex:0 0 auto;margin:0;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.brand-groups{display:flex;align-items:center;justify-content:flex-end;gap:24px;min-width:0}
+.brand-group{display:flex;align-items:center;gap:19px;min-width:0;white-space:nowrap}
+.brand-group-label{color:var(--teal-dark);font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.brand-divider{width:1px;height:28px;background:rgba(23,60,75,.14);flex:0 0 auto}
+.brand-wordmark{color:rgba(23,60,75,.76);font-size:16px;line-height:1;letter-spacing:-.04em;transition:color .2s ease,transform .2s ease}
+.brand-wordmark:hover{color:var(--navy);transform:translateY(-1px)}
+.brand-rayban{font-family:Georgia,serif;font-size:17px;font-weight:700;letter-spacing:-.06em}
+.brand-oakley{font-family:Arial,sans-serif;font-size:15px;font-weight:900;letter-spacing:.03em}
+.brand-transitions{font-family:Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:-.06em}
+.brand-varilux{font-family:Georgia,serif;font-size:16px;font-weight:700;font-style:italic}
+.brand-crizal{font-size:15px;font-weight:800;letter-spacing:-.07em}
+.brand-zeiss{font-family:Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:.08em}
+.brand-shamir{font-size:15px;font-weight:800;letter-spacing:-.06em}
+@media(max-width:900px){.brand-strip-inner{display:block;padding:15px 18px}.brand-strip-label{display:block;margin-bottom:12px}.brand-groups{justify-content:flex-start;gap:18px;overflow-x:auto;padding-bottom:3px;scrollbar-width:none}.brand-groups::-webkit-scrollbar{display:none}.brand-group{gap:15px}.brand-divider{height:24px}}
+@media(max-width:560px){.brand-strip-inner{padding-inline:18px}.brand-strip-label{font-size:8px}.brand-wordmark{font-size:14px}.brand-rayban{font-size:16px}.brand-group-label{font-size:8px}.brand-groups{gap:16px}}
+@media(prefers-reduced-motion:reduce){.brand-wordmark{transition:none}}
