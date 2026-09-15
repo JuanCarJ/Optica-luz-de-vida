@@ -1,14 +1,13 @@
-# Boceto — Óptica Luz de Vida
+# Óptica Luz de Vida — propuesta web
 
-Prototipo navegable de una página para validar con el cliente. Abre `index.html` en un navegador; no requiere instalación.
+Landing estática responsive para presentar una experiencia más clara, cercana y sobria. Abre `index.html` en un navegador; no requiere instalación.
 
 ## Qué incluye
 
-- Hero responsive con tono azul/turquesa inspirado en la identidad pública actual.
-- Servicios, monturas filtrables, sedes de Marinilla y Granada, y flujo de solicitud de cita.
-- Chatbot visual de demostración con derivación a equipo humano.
-- Imágenes sintéticas etiquetadas como generadas por IA para presentar la dirección visual.
-- Investigación consolidada con fuentes, datos verificados, redes encontradas y pendientes de validación.
+- Hero responsive con una paleta navy, turquesa, coral y crema inspirada en la identidad pública actual.
+- Servicios, monturas filtrables con detalle accesible, las tres sedes de Marinilla, Granada y Urrao, y flujo de solicitud de cita.
+- Fotografías de ambiente y equipo reutilizadas desde los activos disponibles; las fotos de Google Maps quedan sujetas a autorización de uso.
+- Navegación móvil, estados de foco, `prefers-reduced-motion`, mapas, WhatsApp por sede y resumen visible de tratamiento de datos.
 
 ## Redes sociales encontradas
 
@@ -16,15 +15,11 @@ Prototipo navegable de una página para validar con el cliente. Abre `index.html
 - Linktree oficial: [linktr.ee/opticaluzdevida](https://linktr.ee/opticaluzdevida), con web y WhatsApp por sede.
 - No se encontró un perfil público verificable de Facebook o TikTok asociado a este negocio durante la consulta; conviene pedir los enlaces al cliente antes de publicarlos.
 
-## Siguiente fase de desarrollo
+## Antes de publicar
 
-1. Confirmar logo, colores, textos legales, horarios de Granada y autorización para usar fotografías/activos de marca.
-2. Conectar formulario y chatbot a disponibilidad real, WhatsApp y un panel interno, con consentimiento Ley 1581.
-3. Cargar inventario real de monturas y modelos GLB/glTF para visor 360° con fallback 2D.
-4. Medir agenda, clics de WhatsApp y exploración de catálogo; optimizar rendimiento y accesibilidad WCAG AA.
+1. Confirmar logo, colores, textos legales, horarios de las tres sedes y autorización para usar fotografías/activos de marca.
+2. Conectar la solicitud de cita a disponibilidad real o a un panel interno; hoy prepara un enlace de WhatsApp sin guardar PII.
+3. Sustituir el catálogo de demostración por inventario real y conservar el fallback 2D si no existe visor 360°.
+4. Medir agenda, clics de WhatsApp y exploración de catálogo; repetir la revisión WCAG AA con contenido definitivo.
 
-Las cifras, horarios y servicios del prototipo provienen del sitio oficial consultado en septiembre de 2026. Los textos de producto, precios, testimonios y disponibilidad son intencionalmente de demostración.
-
-## Respaldo
-
-El pie de página incluye un enlace de respaldo tecnológico a [Dautia](https://www.dautia.com/).
+Las cifras, horarios y servicios provienen de la información pública disponible al preparar esta propuesta. Los nombres de monturas y sus imágenes son demostrativos hasta recibir inventario y permisos definitivos.
