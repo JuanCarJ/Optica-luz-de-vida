@@ -46,6 +46,42 @@ body{background:var(--surface-soft);color:var(--text)}
 .split-story{margin-top:56px;padding-bottom:82px}
 @media(max-width:700px){.team{padding-top:70px;padding-bottom:55px}.locations{padding-top:58px;padding-bottom:72px}.split-story{margin-top:36px;padding-bottom:62px}}
 
+/* Servicios: cristal líquido con volúmenes redondos, sin barras decorativas */
+.services{background:radial-gradient(circle at 80% 15%,rgba(255,255,255,.7) 0 8%,transparent 28%),linear-gradient(135deg,#f8f6ef 0%,#edf5f1 100%)}
+.services:before{width:560px;height:560px;right:-150px;top:-230px;border:1px solid rgba(25,137,130,.18);background:radial-gradient(circle at 38% 44%,rgba(255,255,255,.52),rgba(80,183,176,.1) 39%,rgba(255,255,255,0) 70%);box-shadow:inset 0 0 0 12px rgba(255,255,255,.12),inset 0 0 45px rgba(255,255,255,.44),0 0 0 24px rgba(25,137,130,.035);backdrop-filter:blur(4px)}
+.service-card{border-radius:30px;background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.82);box-shadow:0 16px 34px rgba(23,60,75,.08),inset 0 1px 0 rgba(255,255,255,.7);backdrop-filter:blur(14px) saturate(115%)}
+.service-card:before{content:"";position:absolute;width:120px;height:120px;right:-38px;top:-46px;border-radius:50%;background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.42);box-shadow:inset 0 0 18px rgba(255,255,255,.4);pointer-events:none}
+.service-card:nth-child(2){background:rgba(241,247,243,.68)}
+.service-card:nth-child(3){background:rgba(255,246,237,.72)}
+.service-card:nth-child(4){background:rgba(244,241,247,.72)}
+.service-featured{background:rgba(23,60,75,.96);border-color:rgba(255,255,255,.12);box-shadow:0 18px 38px rgba(23,60,75,.18),inset 0 1px 0 rgba(255,255,255,.14)}
+.service-featured:before{background:rgba(80,183,176,.11);border-color:rgba(80,183,176,.28)}
+.service-wave{width:142px;height:142px;right:-52px;bottom:-57px;opacity:.55}
+@media(max-width:700px){.service-card{border-radius:26px}.services:before{width:390px;height:390px;right:-170px;top:-150px}}
+@media(prefers-reduced-motion:reduce){.service-card{backdrop-filter:none}}
+
+/* Ajuste de ritmo en servicios */
+.services.section{padding-top:98px;padding-bottom:108px}
+.services .service-grid{margin-top:42px}
+.services .service-card{min-height:300px;padding:24px}
+@media(max-width:700px){.services.section{padding-top:72px;padding-bottom:82px}.services .service-grid{margin-top:34px}.services .service-card{min-height:230px;padding:20px}}
+
+/* Pulido transversal: ritmo, foco y controles */
+section[id]{scroll-margin-top:92px}
+.service-card,.frame-card,.team-card,.location-card{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease}
+.service-card:hover,.frame-card:hover,.team-card:hover,.location-card:hover{border-color:rgba(80,183,176,.34)}
+.frame-card:focus-within,.team-card:focus-within,.location-card:focus-within{box-shadow:0 0 0 3px rgba(238,115,83,.24),0 18px 36px rgba(23,60,75,.12)}
+.location-card{box-shadow:0 10px 24px rgba(23,60,75,.06)}
+.location-card:hover{transform:translateY(-5px);box-shadow:0 18px 32px rgba(23,60,75,.12)}
+.booking{border:1px solid rgba(255,255,255,.16)}
+.chatbot-trigger{width:56px;height:56px;padding:0;display:flex;align-items:center;justify-content:center;background:rgba(23,60,75,.88);border:1px solid rgba(255,255,255,.45);box-shadow:0 12px 28px rgba(23,60,75,.24),inset 0 1px 0 rgba(255,255,255,.28);backdrop-filter:blur(14px);font-size:0;transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s ease,background .25s ease}
+.chatbot-trigger:before{content:"✦";font-size:21px;line-height:1;color:#fff}
+.chatbot-trigger:hover{background:rgba(25,137,130,.92);transform:translateY(-4px) scale(1.04);box-shadow:0 16px 34px rgba(23,60,75,.3),inset 0 1px 0 rgba(255,255,255,.34)}
+.chatbot-trigger:after{content:"Asistente";position:absolute;right:66px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(5px);transition:opacity .2s ease,transform .2s ease;background:rgba(23,60,75,.9);color:#fff;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.02em}
+.chatbot-trigger:hover:after,.chatbot-trigger:focus-visible:after{opacity:1;transform:none}
+@media(max-width:560px){.chatbot-trigger{width:52px;height:52px;right:14px;bottom:14px}.chatbot-trigger:after{display:none}}
+@media(prefers-reduced-motion:reduce){.service-card,.frame-card,.team-card,.location-card,.chatbot-trigger,.chatbot-trigger:after{transition:none}.location-card:hover,.chatbot-trigger:hover{transform:none}}
+
 /* Equipo: fondo de estudio más sereno y foco en las personas */
 .team{background:linear-gradient(180deg,#f2f6f2 0%,#edf3ef 100%)}
 .team-photo{background:radial-gradient(circle at 78% 18%,#d7ebe7 0 22%,transparent 53%),linear-gradient(135deg,#e8f0ec 0%,#d9e6e1 100%)}
