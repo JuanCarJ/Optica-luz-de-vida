@@ -113,6 +113,7 @@ section[id]{scroll-margin-top:92px}
 @media(max-width:900px){.nav-toggle{display:block;order:2}.site-header nav{display:flex;position:absolute;top:calc(100% + 1px);left:18px;right:18px;flex-direction:column;gap:0;padding:8px;background:rgba(255,253,249,.96);border:1px solid rgba(23,60,75,.1);border-radius:18px;box-shadow:0 18px 34px rgba(23,60,75,.14);opacity:0;visibility:hidden;transform:translateY(-7px);transition:opacity .2s ease,transform .2s ease,visibility .2s ease}.site-header{position:sticky}.site-header nav.is-open{opacity:1;visibility:visible;transform:none}.site-header nav a{padding:13px 14px;border-radius:11px}.site-header nav a:hover{background:#eef6f2}.site-header .button{order:3}.frame-dialog-content{padding:23px 21px 25px}.frame-dialog-content h2{font-size:35px}}
 @media(max-width:560px){.frame-dialog-image{height:220px}}
 @media(prefers-reduced-motion:reduce){.nav-toggle span,.site-header nav,.frame-dialog-close{transition:none}}
+.chatbot-trigger span{display:none!important}
 
 /* Último ajuste de composición */
 section[id]{scroll-margin-top:128px}
