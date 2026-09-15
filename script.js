@@ -62,13 +62,14 @@
   let lastNavTrigger = navToggle;
   const setMenu = (open) => {
     if (!nav || !navToggle) return;
+    const compactNav = window.innerWidth <= 900;
     lastNavTrigger = navToggle;
     nav.classList.toggle('is-open', open);
     navToggle.setAttribute('aria-expanded', String(open));
     navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
     navToggle.classList.toggle('is-open', open);
-    nav.setAttribute('aria-hidden', String(!open));
-    if (open) nav.querySelector('a')?.focus();
+    nav.setAttribute('aria-hidden', String(compactNav ? !open : false));
+    if (open) window.setTimeout(() => nav.querySelector('a')?.focus(), 0);
     else if (document.activeElement && nav.contains(document.activeElement)) lastNavTrigger?.focus();
   };
   if (nav && navToggle) {
@@ -78,8 +79,64 @@
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
     document.addEventListener('click', (event) => { if (nav.classList.contains('is-open') && !nav.contains(event.target) && !navToggle.contains(event.target)) setMenu(false); });
     window.addEventListener('resize', () => { if (window.innerWidth > 900) setMenu(false); }, { passive: true });
-    nav.setAttribute('aria-hidden', 'true');
+    nav.setAttribute('aria-hidden', String(window.innerWidth <= 900));
   }
+
+  // Privacidad: permanece fuera del flujo del landing y se abre desde el footer o el consentimiento.
+  const privacyDialog = byId('privacy-dialog');
+  const privacyClose = byId('privacy-dialog-close');
+  let lastPrivacyTrigger = null;
+  const closePrivacy = () => {
+    if (!privacyDialog) return;
+    if (typeof privacyDialog.close === 'function' && privacyDialog.open) privacyDialog.close();
+    lastPrivacyTrigger?.focus();
+  };
+  const openPrivacy = (trigger) => {
+    if (!privacyDialog) return;
+    lastPrivacyTrigger = trigger;
+    if (typeof privacyDialog.showModal === 'function' && !privacyDialog.open) privacyDialog.showModal();
+    privacyClose?.focus();
+  };
+  const privacyTrigger = document.createElement('button');
+  privacyTrigger.type = 'button';
+  privacyTrigger.className = 'footer-policy-link';
+  privacyTrigger.textContent = 'Política de privacidad';
+  privacyTrigger.setAttribute('aria-haspopup', 'dialog');
+  privacyTrigger.addEventListener('click', () => openPrivacy(privacyTrigger));
+  qs('.footer-bottom')?.append(privacyTrigger);
+  qsa('a[href="#privacidad"]').forEach((trigger) => {
+    trigger.addEventListener('click', (event) => { event.preventDefault(); openPrivacy(trigger); });
+    trigger.setAttribute('aria-haspopup', 'dialog');
+  });
+  privacyClose?.addEventListener('click', closePrivacy);
+  privacyDialog?.addEventListener('cancel', (event) => { event.preventDefault(); closePrivacy(); });
+  privacyDialog?.addEventListener('click', (event) => { if (event.target === privacyDialog) closePrivacy(); });
+
+  // Horarios: convierte el texto corrido en filas legibles por día y rango.
+  qsa('.location-data > div:nth-child(2)').forEach((hours) => {
+    const paragraph = qs('p', hours);
+    if (!paragraph || hours.querySelector('.hours-list')) return;
+    const lines = paragraph.innerHTML.split(/<br\s*\/?>/i).map((line) => line.replace(/<[^>]*>/g, '').trim()).filter(Boolean);
+    const list = document.createElement('ul');
+    list.className = 'hours-list';
+    let lastTime = null;
+    lines.forEach((line) => {
+      const separator = line.indexOf(' · ');
+      if (separator < 0 && lastTime) {
+        lastTime.append(document.createElement('br'), document.createTextNode(line));
+        return;
+      }
+      const row = document.createElement('li');
+      const day = document.createElement('span');
+      const time = document.createElement('time');
+      day.textContent = separator < 0 ? 'Horario' : line.slice(0, separator);
+      time.textContent = separator < 0 ? line : line.slice(separator + 3);
+      row.append(day, time);
+      list.append(row);
+      lastTime = time;
+    });
+    paragraph.replaceWith(list);
+  });
 
   // Filtros de monturas con estado accesible.
   const pills = qsa('.pill[data-filter]');

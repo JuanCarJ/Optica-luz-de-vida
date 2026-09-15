@@ -369,3 +369,40 @@ h1,h2,h3,.button,.site-header nav,.announcement,.eyebrow,.card-number,.frame-tag
 .location-data small{font-size:10px}
 .whatsapp-float{bottom:max(16px,env(safe-area-inset-bottom));opacity:.94}
 @media(max-width:700px){.services .service-card{min-height:276px}.location-gallery figure:nth-child(2){transform:none}.whatsapp-float{right:12px}}
+
+/* tercera pasada: privacidad discreta, horarios escaneables y navegación con feedback */
+.privacy-summary{display:none!important}
+.privacy-dialog{width:min(760px,calc(100% - 32px));max-height:min(720px,calc(100% - 32px));border:1px solid var(--line);border-radius:22px;padding:34px;background:var(--paper);color:var(--ink);box-shadow:0 30px 90px rgba(18,48,74,.28)}
+.privacy-dialog::backdrop{background:rgba(10,31,38,.58);backdrop-filter:blur(5px)}
+.privacy-dialog h2{margin:0 0 14px;font:700 clamp(34px,5vw,52px)/.98 Manrope,sans-serif;letter-spacing:-.055em;color:var(--navy)}
+.privacy-dialog>p:not(.eyebrow){max-width:620px;color:var(--muted);font-size:14px;line-height:1.7}
+.privacy-dialog .privacy-grid{margin-top:28px}
+.privacy-dialog-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--cream);color:var(--navy);font-size:22px;line-height:1;cursor:pointer}
+.privacy-dialog-close:hover{background:#fff;transform:rotate(8deg)}
+.footer-policy-link{border:0;background:transparent;color:#a7c3c4;text-decoration:underline;text-underline-offset:3px;font:inherit;font-size:10px;cursor:pointer;padding:0;min-height:44px}
+.footer-policy-link:hover{color:#fff}
+.location-gallery .row-heading>p,.location-gallery figcaption{display:none}
+.location-gallery .row-heading{justify-content:flex-start}
+.location-gallery-grid{margin-top:30px}
+.location-data{align-items:start}
+.hours-list{list-style:none;margin:7px 0 0;padding:0;display:grid;gap:7px}
+.hours-list li{display:grid;grid-template-columns:minmax(56px,auto) 1fr;gap:10px;align-items:start;font-size:12px;line-height:1.45}
+.hours-list li span{font-weight:800;color:var(--navy);white-space:nowrap}
+.featured-location .hours-list li span{color:#d7f0ec}
+.hours-list time{font-variant-numeric:tabular-nums;color:var(--muted)}
+.featured-location .hours-list time{color:#c9e1df}
+.site-header nav a{position:relative;isolation:isolate;transition:color .2s ease,transform .2s ease}
+.site-header nav a::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;border-radius:99px;background:var(--coral);transform:scaleX(0);transform-origin:left center;transition:transform .25s cubic-bezier(.22,1,.36,1)}
+.site-header nav a:hover,.site-header nav a:focus-visible{color:var(--navy);transform:translateY(-2px)}
+.site-header nav a:hover::after,.site-header nav a:focus-visible::after{transform:scaleX(1)}
+.site-header nav .nav-social{display:inline-flex;align-items:center;justify-content:center;width:34px;padding:0;color:var(--navy)}
+.site-header nav .nav-social svg{width:18px;height:18px;transition:transform .2s ease,color .2s ease}
+.site-header nav .nav-social::after{display:none}
+.site-header nav .nav-social:hover svg,.site-header nav .nav-social:focus-visible svg{color:var(--coral);transform:translateY(-2px) rotate(-5deg)}
+.hero-actions .text-link{gap:8px}
+.glasses-icon{width:25px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease,color .2s ease}
+.hero-actions .text-link:hover .glasses-icon{color:var(--coral);transform:rotate(-6deg) translateY(-1px)}
+.hero-actions .text-link>b{font-size:18px;font-weight:800;line-height:1;transition:transform .2s ease}
+.hero-actions .text-link:hover>b{transform:translateX(3px)}
+@media(max-width:700px){.privacy-dialog{padding:28px 20px 22px}.privacy-dialog .privacy-grid{grid-template-columns:1fr}.privacy-dialog h2{font-size:36px}.location-data{grid-template-columns:1fr;gap:16px}.hours-list{gap:6px}.site-header nav a::after{display:none}}
+@media(prefers-reduced-motion:reduce){.site-header nav a,.site-header nav a::after,.privacy-dialog-close,.glasses-icon,.hero-actions .text-link>b,.site-header nav .nav-social svg{transition:none}}
