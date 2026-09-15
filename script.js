@@ -122,7 +122,7 @@
         closeFrameDialog(); setTimeout(scrollToBooking, 0);
       };
     }
-    if (typeof dialog.showModal === 'function') dialog.showModal();
+    if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
     dialog.classList.add('is-open'); (dialogClose || dialog).focus?.();
   };
   qsa('.frame-explore[data-frame]').forEach((trigger) => trigger.addEventListener('click', () => openFrameDialog(trigger)));
@@ -194,3 +194,4 @@
   };
   window.addEventListener('scroll', updateProgress, { passive: true }); window.addEventListener('resize', updateProgress, { passive: true }); updateProgress();
 })();
+
