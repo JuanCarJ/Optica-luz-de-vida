@@ -88,6 +88,15 @@ section[id]{scroll-margin-top:92px}
 .social-icon:hover,.social-icon:focus-visible{background:var(--secondary);border-color:var(--secondary);color:var(--primary);transform:translateY(-3px)}
 @media(prefers-reduced-motion:reduce){.social-icon{transition:none}.social-icon:hover{transform:none}}
 
+.location-data small{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.13em;font-weight:800}
+.location-data small:before{content:"◷";font-size:14px;line-height:1;color:var(--accent)}
+.location-data a{font-weight:700;color:var(--text)}
+.featured-location .location-data a{color:#fff}
+.location-data p{font-size:12px;line-height:1.7;margin-top:8px;color:var(--text-muted)}
+.featured-location .location-data p{color:#c9e1df}
+.location-map{height:170px}
+@media(max-width:560px){.location-map{height:150px}}
+
 /* Último ajuste de composición */
 section[id]{scroll-margin-top:128px}
 .map-fallback{top:10px;bottom:auto;z-index:4;background:rgba(255,253,249,.96)}
@@ -95,6 +104,16 @@ section[id]{scroll-margin-top:128px}
 @media(min-width:901px){.hero{min-height:min(760px,calc(100vh - 110px))}.frames-intro,.row-heading{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(240px,.65fr);align-items:end;max-width:980px}.frames-intro>p,.row-heading>p{justify-self:end}}
 @media(min-width:701px){.team-photo{height:330px}}
 @media(max-width:700px){.services .service-card{min-height:230px}}
+
+/* Formulario: campos suaves y redondeados */
+.booking-form input,.booking-form select{min-height:52px;padding:13px 16px;border-radius:15px;background:rgba(248,252,250,.92);border:1px solid rgba(23,60,75,.16);box-shadow:inset 0 1px 2px rgba(23,60,75,.03);transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.booking-form input::placeholder{color:#819095;opacity:1}
+.booking-form input:hover,.booking-form select:hover{border-color:rgba(25,137,130,.42);background:#fff}
+.booking-form input:focus,.booking-form select:focus{border-color:var(--secondary);box-shadow:0 0 0 4px rgba(80,183,176,.16);background:#fff}
+.booking-form select{appearance:auto}
+.consent input{accent-color:var(--secondary)}
+.booking-form .button{min-height:56px;border-radius:18px}
+@media(max-width:700px){.booking-form input,.booking-form select{min-height:50px;border-radius:14px}.booking-form .button{border-radius:16px}}
 
 /* Equipo: fondo de estudio más sereno y foco en las personas */
 .team{background:linear-gradient(180deg,#f2f6f2 0%,#edf3ef 100%)}
